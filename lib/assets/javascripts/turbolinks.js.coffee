@@ -124,12 +124,12 @@ constrainPageCacheTo = (limit) ->
     delete pageCache[key]
 
 changePage = (title, body, csrfToken, runScripts) ->
-  beReplaced = body.getElementById 'newReplaceBody' || body
-  oldReplaced = document.body.getElementById 'newReplaceBody' || document.body
+  beReplaced = body.querySelector('div[id=newReplaceBody]') || body
+  oldReplaced = document.body.querySelector('div[id=newReplaceBody]') || document.body
 
   triggerEvent EVENTS.BEFORE_UNLOAD
   document.title = title
-  document.documentElement.replaceChild beReplaced, oldReplaced
+  document.body.replaceChild beReplaced, oldReplaced
   CSRFToken.update csrfToken if csrfToken?
   setAutofocusElement()
   executeScriptTags() if runScripts
