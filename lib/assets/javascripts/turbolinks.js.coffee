@@ -138,7 +138,7 @@ changePage = (title, body, csrfToken, runScripts) ->
   triggerEvent EVENTS.UPDATE
 
 executeScriptTags = ->
-  scripts = Array::slice.call document.body.querySelectorAll 'script:not([data-turbolinks-eval="false"])'
+  scripts = Array::slice.call document.body.querySelector('div[id=newReplaceBody]').querySelectorAll 'script:not([data-turbolinks-eval="false"])'
   for script in scripts when script.type in ['', 'text/javascript']
     copy = document.createElement 'script'
     copy.setAttribute attr.name, attr.value for attr in script.attributes
